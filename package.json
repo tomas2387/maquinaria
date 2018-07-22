@@ -1,0 +1,30 @@
+{
+  "name": "maquina",
+  "version": "0.0.1",
+  "description": "Simple finite state machine implementation in javascript",
+  "main": "maquina.js",
+  "scripts": {
+    "test": "mocha -u tdd maquina_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomas2387/maquina.git"
+  },
+  "keywords": [
+    "finite",
+    "state",
+    "machine",
+    "state"
+  ],
+  "author": "tomas2387",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomas2387/maquina/issues"
+  },
+  "homepage": "https://github.com/tomas2387/maquina#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "sinon": "^6.1.4",
+    "mocha": "^5.2.0"
+  }
+}
