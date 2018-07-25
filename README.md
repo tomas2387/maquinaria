@@ -83,5 +83,5 @@ So the user will click the button once, the machine will transition to `buy_coin
 
 - Try to maintain the state machine simple.
 - Limit the number of states
-- Avoid transient states (like show a message and go back to last state)
+- Avoid micro-transient states (like show a message and go back to last state)
 - Whenever it seems impossible to add another state to your current machine, maybe its time to add another state machine
