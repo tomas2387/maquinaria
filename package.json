@@ -4,9 +4,8 @@
   "description": "Simple finite state machine implementation in javascript",
   "main": "maquina.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha && nyc report --reporter=text-lcov | coveralls",
     "pretest": "standard",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "coverage:local": "nyc npm test && nyc report --reporter=html"
   },
   "repository": {
