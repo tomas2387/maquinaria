@@ -1,10 +1,10 @@
 {
-  "name": "maquina",
+  "name": "maquinajs",
   "version": "0.0.1",
   "description": "Simple finite state machine implementation in javascript",
   "main": "maquina.js",
   "scripts": {
-    "test": "mocha -u tdd maquina_test.js"
+    "test": "standard && mocha -u tdd maquina_test.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,8 @@
   "homepage": "https://github.com/tomas2387/maquina#readme",
   "devDependencies": {
     "chai": "^4.1.2",
+    "mocha": "^5.2.0",
     "sinon": "^6.1.4",
-    "mocha": "^5.2.0"
+    "standard": "^11.0.1"
   }
 }
