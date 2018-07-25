@@ -1,7 +1,7 @@
 (function (exports) {
   var Maquina = function Maquina (stateGraph) {
-    this.state = stateGraph
-    var initial = Object.keys(stateGraph)[0]
+    this.state = (stateGraph && typeof stateGraph === 'object') ? stateGraph : {}
+    var initial = Object.keys(this.state)[0]
     if (this.state[initial]) {
       this.state[initial].action()
       this.current = initial

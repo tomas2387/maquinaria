@@ -1,9 +1,21 @@
 /* global suite, test */
 
 suite('maquina', () => {
-  const {Maquina} = require('./maquina.js')
+  const {Maquina} = require('../maquina.js')
   const {assert} = require('chai')
   const {spy} = require('sinon')
+
+  const invalidStateCases = [null, '', 0, true]
+  invalidStateCases.forEach(invalidState => {
+    test(`WhenCalledWithInvalidState_ShouldSetEmptyState[${invalidState}]`, () => {
+      const sut = new Maquina(invalidState) // eslint-disable-line no-new
+      assert.deepEqual(sut.state, {})
+    })
+  })
+
+  test(`WhenCalledWithEmptyState_ShouldNotFail`, () => {
+    new Maquina({}) // eslint-disable-line no-new
+  })
 
   test('WhenCalledWithAnInitialState_ShouldExecuteThatState', () => {
     const idleAction = spy()
@@ -16,7 +28,7 @@ suite('maquina', () => {
   })
 
   test('WhenTransitioningToAnotherState_ShouldExecuteTheTransitionedState', () => {
-    const idleAction = spy()
+    const winAction = spy()
     const sut = new Maquina({
       do_something: {
         action: function () {},
@@ -25,15 +37,15 @@ suite('maquina', () => {
         }
       },
       win_state: {
-        action: idleAction
+        action: winAction
       }
     })
     sut.transition('win_state')
-    assert.deepEqual(true, idleAction.calledOnce)
+    assert.deepEqual(true, winAction.calledOnce)
   })
 
   test('WhenInvalidTransitioningState_ShouldNotExecuteTheTransitionedState', () => {
-    const idleAction = spy()
+    const winAction = spy()
     const sut = new Maquina({
       do_nothing: {
         action: function () {},
@@ -42,15 +54,15 @@ suite('maquina', () => {
         }
       },
       win_state: {
-        action: idleAction
+        action: winAction
       }
     })
     sut.transition('win_state')
-    assert.deepEqual(false, idleAction.calledOnce)
+    assert.deepEqual(false, winAction.calledOnce)
   })
 
   test('WhenTransitioningToAnotherStateAnotherStateAlias_ShouldExecuteTheTransitionedState', () => {
-    const idleAction = spy()
+    const doubleClickAction = spy()
     const sut = new Maquina({
       idle: {
         action: function () {},
@@ -65,17 +77,17 @@ suite('maquina', () => {
         }
       },
       double_click: {
-        action: idleAction,
+        action: doubleClickAction,
         to: {}
       }
     })
     sut.transition('click')
     sut.transition('click')
-    assert.deepEqual(true, idleAction.calledOnce)
+    assert.deepEqual(true, doubleClickAction.calledOnce)
   })
 
   test('WhenTransitioningToAnotherStateAnotherStateAlias_ShouldExecuteTheTransitionedState', () => {
-    const idleAction = spy()
+    const clickAction = spy()
     const sut = new Maquina({
       idle: {
         action: function () {},
@@ -84,11 +96,11 @@ suite('maquina', () => {
         }
       },
       click: {
-        action: idleAction,
+        action: clickAction,
         to: {}
       }
     })
     sut.transition('click', true, 2399, {banana: 12})
-    assert.deepEqual([true, 2399, {banana: 12}], idleAction.firstCall.args[0])
+    assert.deepEqual([true, 2399, {banana: 12}], clickAction.firstCall.args[0])
   })
 })
