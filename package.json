@@ -1,13 +1,13 @@
 {
-  "name": "maquinajs",
+  "name": "maquinaria",
   "version": "0.1.0",
   "description": "Simple finite state machine implementation in javascript",
-  "main": "maquina.js",
+  "main": "maquinaria.js",
   "scripts": {
     "test": "nyc mocha && nyc report --reporter=text-lcov | coveralls",
     "pretest": "standard",
     "coverage:local": "nyc npm test && nyc report --reporter=html",
-    "minify": "uglifyjs --output maquina.min.js --compress --mangle -- maquina.js",
+    "minify": "uglifyjs --output maquina.min.js --compress --mangle -- maquinaria.js",
     "mutant": "stryker run"
   },
   "repository": {

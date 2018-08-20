@@ -1,7 +1,7 @@
 /* global suite, test */
 
 suite('maquina', () => {
-  const {Maquina} = require('../maquina.js')
+  const {Maquina} = require('../maquinaria.js')
   const {assert} = require('chai')
   const {spy} = require('sinon')
 

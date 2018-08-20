@@ -1,4 +1,4 @@
-# 🎛️ Maquina
+# 🎛️ Maquinaria
 20 LOC javascript finite state machine.     
 Made with TDD, this machine is ready to run in all browsers and environments.
 
