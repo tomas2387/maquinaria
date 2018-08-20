@@ -19,13 +19,13 @@ The first state is the initial state and is executed first.
 
 ```javascript
 var m = new Maquina({
-    idle: {
+    IDLE: {
         action: function() {},
         to: {
-            click: 'clicked'
+            click: 'CLICKED'
         }
     },
-    clicked: {
+    CLICKED: {
         action: function(aBoolean, aNumber, anObject) {
             // Here we modify whatever this state should do
         },
@@ -38,7 +38,7 @@ document.querySelector('button')
     m.transition('click', true, 2399, {banana: 12})
 })
 ```
-In here, the user only can click once in the button, as the `clicked` state does not have any available transitions to another `click` state.
+In here, the user only can click once in the button, as the `CLICKED` state does not have any available transitions to another `click` state. Therefore we reach the end of the machine.
 
 ## Control your transitions
 
@@ -83,5 +83,5 @@ So the user will click the button once, the machine will transition to `buy_coin
 
 - Try to maintain the state machine simple.
 - Limit the number of states
-- Avoid micro-transient states (like show a message and go back to last state)
-- Whenever it seems impossible to add another state to your current machine, maybe its time to add another state machine
+- Avoid micro-transient states (like show a message and go back to last state). It's harder to reason about a machine that has many temporal states.
+- Whenever it seems impossible to add another state to your current machine, maybe its time to add another simplier state machine.

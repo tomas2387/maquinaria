@@ -16,9 +16,7 @@
         this,
         Array.prototype.slice.call(arguments).splice(1)
       )
-      this.current = toState
-    } else {
-      console.warn('No transition from state ' + this.current + ' to state ' + toState)
+      this.current = this.state[this.current].to[toState]
     }
   }
   exports.Maquina = Maquina

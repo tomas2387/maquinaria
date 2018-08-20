@@ -6,7 +6,9 @@
   "scripts": {
     "test": "nyc mocha && nyc report --reporter=text-lcov | coveralls",
     "pretest": "standard",
-    "coverage:local": "nyc npm test && nyc report --reporter=html"
+    "coverage:local": "nyc npm test && nyc report --reporter=html",
+    "minify": "uglifyjs --output maquina.min.js --compress --mangle -- maquina.js",
+    "mutant": "stryker run"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,12 @@
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
     "sinon": "^6.1.4",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "stryker": "^0.28.0",
+    "stryker-api": "^0.20.0",
+    "stryker-javascript-mutator": "^0.9.0",
+    "stryker-mocha-framework": "^0.12.0",
+    "stryker-mocha-runner": "^0.14.0",
+    "uglify-js": "^3.4.7"
   }
 }

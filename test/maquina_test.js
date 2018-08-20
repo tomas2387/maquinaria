@@ -20,7 +20,7 @@ suite('maquina', () => {
   test('WhenCalledWithAnInitialState_ShouldExecuteThatState', () => {
     const idleAction = spy()
     new Maquina({ // eslint-disable-line no-new
-      idle: {
+      IDLE: {
         action: idleAction
       }
     })
@@ -30,53 +30,53 @@ suite('maquina', () => {
   test('WhenTransitioningToAnotherState_ShouldExecuteTheTransitionedState', () => {
     const winAction = spy()
     const sut = new Maquina({
-      do_something: {
+      DO_SOMETHING: {
         action: function () {},
         to: {
-          win_state: 'win_state'
+          win: 'WIN'
         }
       },
-      win_state: {
+      WIN: {
         action: winAction
       }
     })
-    sut.transition('win_state')
+    sut.transition('win')
     assert.deepEqual(true, winAction.calledOnce)
   })
 
   test('WhenInvalidTransitioningState_ShouldNotExecuteTheTransitionedState', () => {
     const winAction = spy()
     const sut = new Maquina({
-      do_nothing: {
+      DO_NOTHING: {
         action: function () {},
         to: {
-          lose_state: 'lose_state'
+          LOSE: 'lose_state'
         }
       },
-      win_state: {
+      WIN: {
         action: winAction
       }
     })
-    sut.transition('win_state')
+    sut.transition('WIN')
     assert.deepEqual(false, winAction.calledOnce)
   })
 
   test('WhenTransitioningToAnotherStateAnotherStateAlias_ShouldExecuteTheTransitionedState', () => {
     const doubleClickAction = spy()
     const sut = new Maquina({
-      idle: {
+      IDLE: {
         action: function () {},
         to: {
-          click: 'click'
+          click: 'CLICK'
         }
       },
-      click: {
+      CLICK: {
         action: function () {},
         to: {
-          click: 'double_click'
+          click: 'DOUBLE_CLICK'
         }
       },
-      double_click: {
+      DOUBLE_CLICK: {
         action: doubleClickAction,
         to: {}
       }
@@ -89,13 +89,13 @@ suite('maquina', () => {
   test('WhenTransitioningToAnotherStateAnotherStateAlias_ShouldExecuteTheTransitionedState', () => {
     const clickAction = spy()
     const sut = new Maquina({
-      idle: {
+      IDLE: {
         action: function () {},
         to: {
-          click: 'click'
+          click: 'CLICK'
         }
       },
-      click: {
+      CLICK: {
         action: clickAction,
         to: {}
       }
