@@ -1,6 +1,6 @@
 {
   "name": "maquinaria",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Simple finite state machine implementation in javascript",
   "main": "dist/maquinaria.cjs.js",
   "module": "dist/maquinaria.esm.js",
