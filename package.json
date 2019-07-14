@@ -2,18 +2,24 @@
   "name": "maquinaria",
   "version": "0.1.1",
   "description": "Simple finite state machine implementation in javascript",
-  "main": "maquinaria.js",
+  "main": "dist/maquinaria.cjs.js",
+  "module": "dist/maquinaria.esm.js",
+  "unpkg": "dist/maquinaria.umd.js",
   "scripts": {
-    "test": "nyc mocha && nyc report --reporter=text-lcov | coveralls",
-    "pretest": "standard",
-    "coverage:local": "nyc npm test && nyc report --reporter=html",
-    "minify": "uglifyjs --output maquina.min.js --compress --mangle -- maquinaria.js",
-    "mutant": "stryker run"
+    "mutant": "stryker run",
+    "build": "rollup -c",
+    "test": "jest --forceExit --detectOpenHandles --coverage",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "pretest": "prettier --write -c maquinaria.js __test__/**.js && npm run build",
+    "prepublishOnly": "npm t"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tomas2387/maquina.git"
+    "url": "git+https://github.com/tomas2387/maquinaria.git"
   },
+  "files": [
+    "dist/*"
+  ],
   "keywords": [
     "finite",
     "state",
@@ -23,21 +29,29 @@
   "author": "tomas2387",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tomas2387/maquina/issues"
+    "url": "https://github.com/tomas2387/maquinaria/issues"
   },
-  "homepage": "https://github.com/tomas2387/maquina#readme",
+  "homepage": "https://github.com/tomas2387/maquinaria#readme",
   "devDependencies": {
-    "chai": "^4.1.2",
     "coveralls": "^3.0.2",
-    "mocha": "^5.2.0",
-    "nyc": "^13.3.0",
-    "sinon": "^6.1.4",
-    "standard": "^11.0.1",
+    "jest": "^24.8.0",
+    "np": "^5.0.3",
+    "prettier": "^1.18.2",
+    "rollup": "^1.16.2",
+    "rollup-plugin-terser": "^5.0.0",
     "stryker": "^0.28.0",
     "stryker-api": "^0.20.0",
     "stryker-javascript-mutator": "^0.14.1",
     "stryker-mocha-framework": "^0.12.0",
-    "stryker-mocha-runner": "^0.14.0",
-    "uglify-js": "^3.4.7"
+    "stryker-mocha-runner": "^0.14.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "dist/"
+    ],
+    "restoreMocks": true
   }
 }
