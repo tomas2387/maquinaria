@@ -1,37 +1,36 @@
 /* global suite, test */
 
-suite('maquina', () => {
-  const {Maquina} = require('../maquinaria.js')
-  const {assert} = require('chai')
-  const {spy} = require('sinon')
+describe('maquina', () => {
+  const { Maquina } = require('../dist/maquinaria.cjs');
 
-  const invalidStateCases = [null, '', 0, true]
+  const invalidStateCases = [null, '', 0, true];
   invalidStateCases.forEach(invalidState => {
     test(`WhenCalledWithInvalidState_ShouldSetEmptyState[${invalidState}]`, () => {
-      const sut = new Maquina(invalidState) // eslint-disable-line no-new
-      assert.deepEqual(sut.state, {})
-    })
-  })
+      const sut = new Maquina(invalidState); // eslint-disable-line no-new
+      expect(sut.state).toEqual({});
+    });
+  });
 
   test(`WhenCalledWithEmptyState_ShouldNotFail`, () => {
-    new Maquina({}) // eslint-disable-line no-new
-  })
+    new Maquina({}); // eslint-disable-line no-new
+  });
 
   test('WhenCalledWithAnInitialState_ShouldExecuteThatState', () => {
-    const idleAction = spy()
-    new Maquina({ // eslint-disable-line no-new
+    const idleAction = jest.fn();
+    new Maquina({
+      // eslint-disable-line no-new
       IDLE: {
         action: idleAction
       }
-    })
-    assert.deepEqual(true, idleAction.calledOnce)
-  })
+    });
+    expect(idleAction).toHaveBeenCalledTimes(1);
+  });
 
   test('WhenTransitioningToAnotherState_ShouldExecuteTheTransitionedState', () => {
-    const winAction = spy()
+    const winAction = jest.fn();
     const sut = new Maquina({
       DO_SOMETHING: {
-        action: function () {},
+        action: function() {},
         to: {
           win: 'WIN'
         }
@@ -39,16 +38,16 @@ suite('maquina', () => {
       WIN: {
         action: winAction
       }
-    })
-    sut.transition('win')
-    assert.deepEqual(true, winAction.calledOnce)
-  })
+    });
+    sut.transition('win');
+    expect(winAction).toHaveBeenCalledTimes(1);
+  });
 
   test('WhenInvalidTransitioningState_ShouldNotExecuteTheTransitionedState', () => {
-    const winAction = spy()
+    const winAction = jest.fn();
     const sut = new Maquina({
       DO_NOTHING: {
-        action: function () {},
+        action: function() {},
         to: {
           LOSE: 'lose_state'
         }
@@ -56,22 +55,22 @@ suite('maquina', () => {
       WIN: {
         action: winAction
       }
-    })
-    sut.transition('WIN')
-    assert.deepEqual(false, winAction.calledOnce)
-  })
+    });
+    sut.transition('WIN');
+    expect(winAction).not.toHaveBeenCalled();
+  });
 
   test('WhenTransitioningToAnotherStateAnotherStateAlias_ShouldExecuteTheTransitionedState', () => {
-    const doubleClickAction = spy()
+    const doubleClickAction = jest.fn();
     const sut = new Maquina({
       IDLE: {
-        action: function () {},
+        action: function() {},
         to: {
           click: 'CLICK'
         }
       },
       CLICK: {
-        action: function () {},
+        action: function() {},
         to: {
           click: 'DOUBLE_CLICK'
         }
@@ -80,17 +79,17 @@ suite('maquina', () => {
         action: doubleClickAction,
         to: {}
       }
-    })
-    sut.transition('click')
-    sut.transition('click')
-    assert.deepEqual(true, doubleClickAction.calledOnce)
-  })
+    });
+    sut.transition('click');
+    sut.transition('click');
+    expect(doubleClickAction).toHaveBeenCalledTimes(1);
+  });
 
   test('WhenTransitioningToAnotherStateAnotherStateAlias_ShouldExecuteTheTransitionedState', () => {
-    const clickAction = spy()
+    const clickAction = jest.fn();
     const sut = new Maquina({
       IDLE: {
-        action: function () {},
+        action: function() {},
         to: {
           click: 'CLICK'
         }
@@ -99,8 +98,12 @@ suite('maquina', () => {
         action: clickAction,
         to: {}
       }
-    })
-    sut.transition('click', true, 2399, {banana: 12})
-    assert.deepEqual([true, 2399, {banana: 12}], clickAction.firstCall.args[0])
-  })
-})
+    });
+    sut.transition('click', true, 2399, { banana: 12 });
+    expect(clickAction).toHaveBeenNthCalledWith(1, [
+      true,
+      2399,
+      { banana: 12 }
+    ]);
+  });
+});
