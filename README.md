@@ -4,7 +4,6 @@ Made with TDD, this machine is ready to run in all browsers and environments.
 
 [![Build Status](https://travis-ci.org/tomas2387/maquinaria.svg?branch=master)](https://travis-ci.org/tomas2387/maquinaria)
 [![Coverage Status](https://coveralls.io/repos/github/tomas2387/maquinaria/badge.svg?branch=master)](https://coveralls.io/github/tomas2387/maquinaria?branch=master)
-[![dependencies Status](https://david-dm.org/tomas2387/maquinaria/status.svg)](https://david-dm.org/tomas2387/maquinaria)
 
 ## Usage
 
