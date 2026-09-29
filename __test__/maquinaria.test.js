@@ -4,7 +4,7 @@ describe('maquina', () => {
   const { Maquina } = require('../dist/maquinaria.cjs');
 
   const invalidStateCases = [null, '', 0, true];
-  invalidStateCases.forEach(invalidState => {
+  invalidStateCases.forEach((invalidState) => {
     test(`WhenCalledWithInvalidState_ShouldSetEmptyState[${invalidState}]`, () => {
       const sut = new Maquina(invalidState); // eslint-disable-line no-new
       expect(sut.state).toEqual({});
@@ -20,8 +20,8 @@ describe('maquina', () => {
     new Maquina({
       // eslint-disable-line no-new
       IDLE: {
-        action: idleAction
-      }
+        action: idleAction,
+      },
     });
     expect(idleAction).toHaveBeenCalledTimes(1);
   });
@@ -30,14 +30,14 @@ describe('maquina', () => {
     const winAction = jest.fn();
     const sut = new Maquina({
       DO_SOMETHING: {
-        action: function() {},
+        action: function () {},
         to: {
-          win: 'WIN'
-        }
+          win: 'WIN',
+        },
       },
       WIN: {
-        action: winAction
-      }
+        action: winAction,
+      },
     });
     sut.transition('win');
     expect(winAction).toHaveBeenCalledTimes(1);
@@ -47,14 +47,14 @@ describe('maquina', () => {
     const winAction = jest.fn();
     const sut = new Maquina({
       DO_NOTHING: {
-        action: function() {},
+        action: function () {},
         to: {
-          LOSE: 'lose_state'
-        }
+          LOSE: 'lose_state',
+        },
       },
       WIN: {
-        action: winAction
-      }
+        action: winAction,
+      },
     });
     sut.transition('WIN');
     expect(winAction).not.toHaveBeenCalled();
@@ -64,21 +64,21 @@ describe('maquina', () => {
     const doubleClickAction = jest.fn();
     const sut = new Maquina({
       IDLE: {
-        action: function() {},
+        action: function () {},
         to: {
-          click: 'CLICK'
-        }
+          click: 'CLICK',
+        },
       },
       CLICK: {
-        action: function() {},
+        action: function () {},
         to: {
-          click: 'DOUBLE_CLICK'
-        }
+          click: 'DOUBLE_CLICK',
+        },
       },
       DOUBLE_CLICK: {
         action: doubleClickAction,
-        to: {}
-      }
+        to: {},
+      },
     });
     sut.transition('click');
     sut.transition('click');
@@ -89,21 +89,21 @@ describe('maquina', () => {
     const clickAction = jest.fn();
     const sut = new Maquina({
       IDLE: {
-        action: function() {},
+        action: function () {},
         to: {
-          click: 'CLICK'
-        }
+          click: 'CLICK',
+        },
       },
       CLICK: {
         action: clickAction,
-        to: {}
-      }
+        to: {},
+      },
     });
     sut.transition('click', true, 2399, { banana: 12 });
     expect(clickAction).toHaveBeenNthCalledWith(1, [
       true,
       2399,
-      { banana: 12 }
+      { banana: 12 },
     ]);
   });
 });

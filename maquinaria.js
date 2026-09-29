@@ -14,7 +14,7 @@ Maquina.prototype.transition = function transition(toState) {
   ) {
     this.state[this.state[this.current].to[toState]].action.call(
       this,
-      Array.prototype.slice.call(arguments).splice(1)
+      Array.prototype.slice.call(arguments).splice(1),
     );
     this.current = this.state[this.current].to[toState];
   }

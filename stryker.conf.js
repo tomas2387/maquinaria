@@ -1,13 +1,11 @@
-module.exports = function (config) {
-  config.set({
-    testRunner: 'mocha',
-    mutator: 'javascript',
-    transpilers: [],
-    reporters: ['clear-text', 'progress'],
-    packageManager: 'npm',
-    testFramework: 'mocha',
-    mochaOptions: { opts: './test/mocha.opts' },
-    coverageAnalysis: 'perTest',
-    mutate: ['maquinaria.js']
-  })
-}
+/** @type {import('@stryker-mutator/api/core').PartialStrykerOptions} */
+module.exports = {
+  testRunner: 'jest',
+  reporters: ['clear-text', 'progress'],
+  packageManager: 'npm',
+  coverageAnalysis: 'off',
+  buildCommand: 'npm run build',
+  tempDirName: 'stryker-tmp',
+  mutate: ['maquinaria.js'],
+  jest: { enableFindRelatedTests: false },
+};
