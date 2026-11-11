@@ -5,8 +5,10 @@ Made with TDD, this machine is ready to run in all browsers and environments.
 [![Version](https://badgen.net/npm/v/maquinaria)](https://www.npmjs.com/package/maquinaria)
 [![CI](https://github.com/tomas2387/maquinaria/actions/workflows/test.yml/badge.svg)](https://github.com/tomas2387/maquinaria/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/tomas2387/maquinaria/badge.svg?branch=master)](https://coveralls.io/github/tomas2387/maquinaria?branch=master)
-[![install size](https://badgen.net/packagephobia/install/maquinaria)](https://packagephobia.com/result?p=maquinaria)
 [![Mutation testing](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Ftomas2387%2Fmaquinaria%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/tomas2387/maquinaria/master)
+[![Types](https://badgen.net/npm/types/maquinaria)](https://www.npmjs.com/package/maquinaria)
+[![Bundle size](https://deno.bundlejs.com/badge?q=maquinaria)](https://bundlejs.com/?q=maquinaria)
+[![License](https://badgen.net/npm/license/maquinaria)](LICENSE)
 
 ## Usage
 
@@ -82,6 +84,29 @@ button.addEventListener('click', function() {
 })
 ```
 So the user will click the button once, the machine will transition to `buy_coins` state, then the user will click a second time, and it will transition to `cant_buy_coins_twice`, as it is an alias of `click` in the `buy_coins` state.
+
+## TypeScript
+
+Types are included. The `State` type describes each state of the machine:
+
+```ts
+import { Maquina, type State } from 'maquinaria';
+
+const clicked: State = {
+  action: (args = []) => {
+    const [button] = args as [HTMLButtonElement];
+    button.setAttribute('disabled', 'disabled');
+  },
+  to: {},
+};
+
+const machine = new Maquina({
+  idle: { action: () => {}, to: { click: 'clicked' } },
+  clicked,
+});
+
+machine.transition('click', document.querySelector('button'));
+```
 
 ## Tips
 
