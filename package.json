@@ -6,12 +6,11 @@
   "module": "dist/maquinaria.esm.js",
   "unpkg": "dist/maquinaria.umd.js",
   "scripts": {
-    "mutant": "stryker run",
     "build": "rollup -c",
     "test": "jest --forceExit --detectOpenHandles --coverage",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "pretest": "prettier --write -c maquinaria.js __test__/**.js && npm run build",
-    "prepublishOnly": "npm t"
+    "prepublishOnly": "npm t",
+    "mutation": "stryker run"
   },
   "repository": {
     "type": "git",
@@ -33,14 +32,12 @@
   },
   "homepage": "https://github.com/tomas2387/maquinaria#readme",
   "devDependencies": {
-    "@rollup/plugin-terser": "^1.0.0",
-    "@stryker-mutator/core": "^10.0.0",
-    "@stryker-mutator/jest-runner": "^10.0.0",
-    "coveralls-next": "^6.0.2",
+    "@rollup/plugin-terser": "^1.0.2",
+    "@stryker-mutator/core": "^10.1.1",
+    "@stryker-mutator/jest-runner": "^10.1.1",
     "jest": "^30.5.2",
-    "np": "^12.1.1",
-    "prettier": "^3.9.9",
-    "rollup": "^4.63.5"
+    "prettier": "^3.9.10",
+    "rollup": "^4.68.2"
   },
   "jest": {
     "verbose": true,
@@ -51,7 +48,12 @@
     "restoreMocks": true
   },
   "overrides": {
-    "js-yaml@^4": "^5.4.2",
-    "tmp": "^0.2.7"
+    "minimatch": "^11.0.7",
+    "qs": "^6.17.1",
+    "glob": "^14.0.4"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "@parcel/watcher": false
   }
 }
