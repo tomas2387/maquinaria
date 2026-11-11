@@ -1,6 +1,7 @@
 /** @type {import('@stryker-mutator/api/core').PartialStrykerOptions} */
-module.exports = {
-  testRunner: 'jest',
+export default {
+  testRunner: 'vitest',
+  mutate: ['maquinaria.js'],
   reporters: [
     'clear-text',
     'progress',
@@ -9,12 +10,6 @@ module.exports = {
     ...(process.env.STRYKER_DASHBOARD_API_KEY ? ['dashboard'] : []),
   ],
   dashboard: { reportType: 'full' },
-  packageManager: 'npm',
-  // Tests run against the built bundle, so per-test coverage is not available.
-  coverageAnalysis: 'off',
-  buildCommand: 'npm run build',
-  tempDirName: 'stryker-tmp',
-  mutate: ['maquinaria.js'],
-  jest: { enableFindRelatedTests: false },
+  coverageAnalysis: 'perTest',
   thresholds: { high: 100, low: 100, break: 100 },
 };

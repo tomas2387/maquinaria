@@ -7,7 +7,7 @@
   "unpkg": "dist/maquinaria.umd.js",
   "scripts": {
     "build": "rollup -c",
-    "test": "jest --forceExit --detectOpenHandles --coverage",
+    "test": "vitest run --coverage",
     "pretest": "prettier --write -c maquinaria.js __test__/**.js && npm run build",
     "prepublishOnly": "npm t",
     "mutation": "stryker run"
@@ -34,26 +34,17 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^1.0.2",
     "@stryker-mutator/core": "^10.1.1",
-    "@stryker-mutator/jest-runner": "^10.1.1",
-    "jest": "^30.5.2",
+    "@stryker-mutator/vitest-runner": "^10.1.1",
+    "@vitest/coverage-v8": "^5.1.0",
     "prettier": "^3.9.10",
-    "rollup": "^4.68.2"
+    "rollup": "^4.68.2",
+    "vitest": "^5.1.0"
   },
-  "jest": {
-    "verbose": true,
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "dist/"
-    ],
-    "restoreMocks": true
+  "allowScripts": {
+    "fsevents@2.3.3": true
   },
   "overrides": {
     "minimatch": "^11.0.7",
-    "qs": "^6.17.1",
-    "glob": "^14.0.4"
-  },
-  "allowScripts": {
-    "fsevents@2.3.3": true,
-    "@parcel/watcher": false
+    "qs": "^6.17.1"
   }
 }

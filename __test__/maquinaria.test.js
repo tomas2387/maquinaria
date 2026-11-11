@@ -1,8 +1,7 @@
-/* global suite, test */
+import { describe, test, expect, vi } from 'vitest';
+import { Maquina } from '../maquinaria.js';
 
 describe('maquina', () => {
-  const { Maquina } = require('../dist/maquinaria.cjs');
-
   const invalidStateCases = [null, '', 0, true];
   invalidStateCases.forEach((invalidState) => {
     test(`WhenCalledWithInvalidState_ShouldSetEmptyState[${invalidState}]`, () => {
@@ -16,7 +15,7 @@ describe('maquina', () => {
   });
 
   test('WhenCalledWithAnInitialState_ShouldExecuteThatState', () => {
-    const idleAction = jest.fn();
+    const idleAction = vi.fn();
     new Maquina({
       // eslint-disable-line no-new
       IDLE: {
@@ -27,7 +26,7 @@ describe('maquina', () => {
   });
 
   test('WhenTransitioningToAnotherState_ShouldExecuteTheTransitionedState', () => {
-    const winAction = jest.fn();
+    const winAction = vi.fn();
     const sut = new Maquina({
       DO_SOMETHING: {
         action: function () {},
@@ -44,7 +43,7 @@ describe('maquina', () => {
   });
 
   test('WhenInvalidTransitioningState_ShouldNotExecuteTheTransitionedState', () => {
-    const winAction = jest.fn();
+    const winAction = vi.fn();
     const sut = new Maquina({
       DO_NOTHING: {
         action: function () {},
@@ -61,7 +60,7 @@ describe('maquina', () => {
   });
 
   test('WhenTransitioningToAnotherStateAnotherStateAlias_ShouldExecuteTheTransitionedState', () => {
-    const doubleClickAction = jest.fn();
+    const doubleClickAction = vi.fn();
     const sut = new Maquina({
       IDLE: {
         action: function () {},
@@ -85,8 +84,8 @@ describe('maquina', () => {
     expect(doubleClickAction).toHaveBeenCalledTimes(1);
   });
 
-  test('WhenTransitioningToAnotherStateAnotherStateAlias_ShouldExecuteTheTransitionedState', () => {
-    const clickAction = jest.fn();
+  test('WhenTransitioningWithArguments_ShouldPassThemToTheAction', () => {
+    const clickAction = vi.fn();
     const sut = new Maquina({
       IDLE: {
         action: function () {},
