@@ -2,8 +2,11 @@
 20 LOC javascript finite state machine.     
 Made with TDD, this machine is ready to run in all browsers and environments.
 
-[![Build Status](https://travis-ci.org/tomas2387/maquinaria.svg?branch=master)](https://travis-ci.org/tomas2387/maquinaria)
+[![Version](https://badgen.net/npm/v/maquinaria)](https://www.npmjs.com/package/maquinaria)
+[![CI](https://github.com/tomas2387/maquinaria/actions/workflows/test.yml/badge.svg)](https://github.com/tomas2387/maquinaria/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/tomas2387/maquinaria/badge.svg?branch=master)](https://coveralls.io/github/tomas2387/maquinaria?branch=master)
+[![install size](https://badgen.net/packagephobia/install/maquinaria)](https://packagephobia.com/result?p=maquinaria)
+[![Mutation testing](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Ftomas2387%2Fmaquinaria%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/tomas2387/maquinaria/master)
 
 ## Usage
 
