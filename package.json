@@ -5,6 +5,7 @@
   "main": "dist/maquinaria.cjs.js",
   "module": "dist/maquinaria.esm.js",
   "unpkg": "dist/maquinaria.umd.js",
+  "types": "maquinaria.d.ts",
   "scripts": {
     "build": "rollup -c",
     "test": "vitest run --coverage",
@@ -17,7 +18,8 @@
     "url": "git+https://github.com/tomas2387/maquinaria.git"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "maquinaria.d.ts"
   ],
   "keywords": [
     "finite",
@@ -38,6 +40,7 @@
     "@vitest/coverage-v8": "^5.1.0",
     "prettier": "^3.9.10",
     "rollup": "^4.68.2",
+    "typescript": "^7.0.2",
     "vitest": "^5.1.0"
   },
   "allowScripts": {

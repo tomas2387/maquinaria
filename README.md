@@ -12,7 +12,7 @@ Made with TDD, this machine is ready to run in all browsers and environments.
 
 Call the constructor passing an object with keys as the name of the states. Each action must have two keys: `action` and `to`.
 
-`action` must be a function, and it will be executed whenever we transition to that state.
+`action` must be a function, and it will be executed whenever we transition to that state. It receives the extra arguments passed to `transition` as a single array.
 
 `to` must be an object, and will have all the available  transitions the state can transition to.
 
@@ -27,7 +27,8 @@ var m = new Maquina({
         }
     },
     CLICKED: {
-        action: function(aBoolean, aNumber, anObject) {
+        action: function(args) {
+            // args is [aBoolean, aNumber, anObject]
             // Here we modify whatever this state should do
         },
         to: {}
@@ -55,7 +56,8 @@ var buyCoinsMachine = new Maquina({
         }
     },
     buy_coins: {
-        action: function(aBoolean, aNumber, anObject) {
+        action: function(args) {
+            // args is [aBoolean, aNumber, anObject]
             // Here we modify whatever this state should do
         },
         to: {
@@ -63,7 +65,8 @@ var buyCoinsMachine = new Maquina({
         }
     },
     cant_buy_coins_twice: {
-        action: function(button) {
+        action: function(args) {
+            var button = args[0]
             // Here we display a message to the user that double clicks are not allowed in this system
             // Or we could disable the button
             button.setAttribute('disabled', 'disabled')

@@ -5,11 +5,13 @@
 ```
 maquinaria/
 ├── maquinaria.js        # source module
+├── maquinaria.d.ts      # hand-written TypeScript types (published)
 ├── dist/                # minified UMD, CJS and ESM builds (generated, do not edit)
-├── __test__/            # Vitest tests (source + published bundles)
+├── __test__/            # Vitest tests (source, published bundles and types)
 ├── rollup.config.mjs    # build configuration
 ├── stryker.config.mjs   # mutation testing configuration
 ├── vitest.config.mts    # test configuration
+├── tsconfig.types.json  # TypeScript config used only by the type tests
 └── .github/workflows/   # CI, CodeQL, npm publish
 ```
 
@@ -19,6 +21,9 @@ maquinaria/
 - `npm test` – formats with Prettier, builds, and runs Vitest with coverage.
 - `npm run mutation` – runs Stryker mutation testing on `maquinaria.js`. CI fails
   if any mutant survives, so every new behavior needs a test that pins it down.
+
+`maquinaria.d.ts` is written by hand. `npm test` also type-checks
+`__test__/types.test-d.ts`, so update both whenever the public API changes.
 
 ## Releasing
 
